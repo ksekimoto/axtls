@@ -1174,7 +1174,7 @@ int send_packet(SSL *ssl, uint8_t protocol, const uint8_t *in, int length)
         if (ssl->version >= SSL_PROTOCOL_VERSION_TLS1_1)
         {
             uint8_t iv_size = ssl->cipher_info->iv_size;
-            uint8_t *t_buf = alloca(msg_length + iv_size);
+            uint8_t *t_buf = (uint8_t *)alloca(msg_length + iv_size);
             memcpy(t_buf + iv_size, ssl->bm_data, msg_length);
             if (get_random(iv_size, t_buf) < 0)
                 return SSL_NOT_OK;

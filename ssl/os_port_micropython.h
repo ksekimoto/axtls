@@ -40,11 +40,19 @@
 #include "os_int.h"
 #include <errno.h>
 #include <sys/types.h>
+#if (!defined(RX63N)) && (!defined(RX64M)) && (!defined(RX65N))
 #ifndef __ets__
 #include <arpa/inet.h>
 #endif
+#endif
 #include <sys/time.h>
 #include "config.h"
+#if defined(RX63N) || defined(RX64M) || defined(RX65N)
+#include <stdio.h>
+#include "py/runtime.h"
+#include "py/mphal.h"
+#include "common.h"
+#endif
 
 ssize_t mp_stream_posix_write(void *sock_obj, const void *buf, size_t len);
 ssize_t mp_stream_posix_read(void *sock_obj, void *buf, size_t len);
